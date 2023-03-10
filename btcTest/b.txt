@@ -1,0 +1,3 @@
+Passwort: Hallo
+Api: g5guIeDHuRrv5ec420uePtoIjk933F1zvyBzZrCLpcoa05QXDXSPOibDM673XbvV
+Secret key: mu5Co9JKD6MqBHEwWic5VeUXuiWPZOK34g0OpqdlBWswD6SI9lMvOZwyER0d7B1e
