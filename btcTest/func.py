@@ -9,7 +9,7 @@ from telethon import TelegramClient, sync, events
 
 def getSecrets(api_key, api_secret, password):
     secrets = list(["", "", ""])
-    with open("b.txt") as file:
+    with open("infos.txt") as file:
         contents = file.readlines()
 
     for line in contents:
