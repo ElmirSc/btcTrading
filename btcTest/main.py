@@ -52,39 +52,41 @@ if password == passwordAnswer:
     numX = list([0, 0])
     getInfos(response, numX)            #get Infos for your EUR and Bitcoin
     plotBitcoins(exchange)
-    sellPrice = 0
+    sellPrice = 25000
     buyPrice = 0
     oldPrice = 0
     btc_price = 0
 
     while (True):
         try:
+
             if response.status_code == 200:
-                getInfos(response, numX)
+
                 btc_ticker = exchange.fetch_ticker('BTC/EUR')
+                balances = exchange.fetch_balance()
+                btc_balance = balances['BTC']['free']
+                eur_balance = balances['EUR']['free']
                 oldPrice = btc_price
                 btc_price = btc_ticker['last']
                 os.system('cls')
-                numberBitcoins = numX[0]
-                balance = numX[1]
-                amount = float(balance) / btc_price
-                bitcoinsPrice = btc_price * float(numberBitcoins)
-            #sendMessage(str(bitcoinsPrice), numberBitcoins, 1)
-                print("Bitcoins:", numberBitcoins)
+                amount = eur_balance / btc_price
+                bitcoinsPrice = btc_price * btc_balance
+                print("Bitcoins:", btc_balance)
                 print("Deine Bitcoins in EUR:", bitcoinsPrice)
                 print("Allgemeiner Bitcoin Preis:", btc_price)
                 print("Alter Bitcoin Preis:", oldPrice)
-                print("Dein Verfügbares Geld in EUR", balance)
-                look = lookForSellOrBuy(exchange,numberBitcoins,oldPrice,buyPrice,btc_price,sellPrice)
-                if look == 0 and float(numberBitcoins) == 0 and float(balance) > 0:       #buy
+                print("Dein Verfügbares Geld in EUR", eur_balance)
+                look = lookForSellOrBuy(exchange,btc_balance,oldPrice,buyPrice,btc_price,sellPrice)
+
+                if look == 0  and eur_balance > 1:       #buy
                     buy_bitcoins(amount, exchange, btc_price)
                     buyPrice = btc_price
 
-                if look == 1 and float(numberBitcoins) > 0:       #sell
-                    sell_bitcoins(numberBitcoins, exchange, btc_price)
+                if look == 1  and eur_balance < 1:       #sell
+                    sell_bitcoins(btc_balance, exchange, btc_price)
                     sellPrice = btc_price
                     buyPrice = 0
-                time.sleep(2)
+
 
             else:
                 print("Error")

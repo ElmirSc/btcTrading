@@ -87,7 +87,7 @@ def sendMessageSell(sold):
     api_id = '26278017'
     api_hash = '4ffa33f476571fa6641b014e523722ed'
     token = '6252172068:AAF_vSsOUJyYFLsdXmdx0wtbhggXzoH6DVc'
-    message = "Sold Bitcoins: " + sold
+    message = "Sold Bitcoins: " + str(sold)
 
     message3 = "-----------------------------------------"
 
@@ -212,10 +212,11 @@ def lookForSellOrBuy(exchange, numberBitcoins, oldPrice,buyPrice, btcPrice , sel
     if oldPrice == 0:
         oldPrice = a[499]
 
-    if sumOfMax < sumOfLittle and bitcoins == 0.000000000000 and oldPrice < btcPrice or sumOfMax < sumOfLittle and bitcoins == 0.000000000000 and sellPrice < btcPrice:
+    if  sumOfMax < sumOfLittle  and sellPrice < btcPrice and sellPrice > 0 or sumOfMax < sumOfLittle and btcPrice > oldPrice or btcPrice < sellPrice-1000:
         return 0
 
-    if btcPrice < buyPrice-1000 and bitcoins > 0.000000000000 or btcPrice < oldPrice-100 and bitcoins > 0.000000000000:
+
+    if btcPrice < buyPrice-1000  or btcPrice < oldPrice :
         return 1
 
 
